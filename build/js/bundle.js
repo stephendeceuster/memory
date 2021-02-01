@@ -403,34 +403,37 @@ exports.default = void 0;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+var Card = function Card(holder, icon) {
+  var _this = this;
 
-var Card = /*#__PURE__*/function () {
-  function Card(holder, icon) {
-    _classCallCheck(this, Card);
+  _classCallCheck(this, Card);
 
-    this._holder = holder;
-    this._icon = icon;
-    this._flippedEvent = new CustomEvent("flipped", {
-      detail: this
+  _defineProperty(this, "init", function () {
+    _this._holder.insertAdjacentHTML("beforeend", "\n      <div class=\"card\">\n        <div class=\"card-inner\">\n          <div class=\"card-front\">\n          \n          </div>\n          <div class=\"card-back\">\n            <svg class=\"icon icon-".concat(_this._icon, "\"><use xlink:href=\"./icons/symbol-defs.svg#icon-").concat(_this._icon, "\"></use></svg>\n          </div>\n        </div>\n      </div>\n      "));
+
+    return _this._holder.querySelector('.card:last-child');
+  });
+
+  _defineProperty(this, "setUpEvents", function () {
+    _this._ref.addEventListener('click', function () {
+      return flip;
     });
-    this._ref = this.init();
-    this._isFlipped = false; //this.setUpEvents();
-  }
+  });
 
-  _createClass(Card, [{
-    key: "init",
-    value: function init() {
-      this._holder.insertAdjacentHTML("beforeend", "\n      <div class=\"card\">\n        <div class=\"card-inner\">\n          <div class=\"card-front\">\n          \n          </div>\n          <div class=\"card-back\">\n            <svg class=\"icon icon-".concat(this._icon, "\"><use xlink:href=\"./icons/symbol-defs.svg#icon-").concat(this._icon, "\"></use></svg>\n          </div>\n        </div>\n      </div>\n      "));
+  _defineProperty(this, "flip", function () {
+    if (_this._isFlipped) {}
+  });
 
-      return this._holder.querySelector('.card:last-child');
-    }
-  }]);
-
-  return Card;
-}();
+  this._holder = holder;
+  this._icon = icon;
+  this._flippedEvent = new CustomEvent("flipped", {
+    detail: this
+  });
+  this._ref = this.init();
+  this._isFlipped = false; //this.setUpEvents();
+};
 
 exports.default = Card;
 },{}],"Memory.js":[function(require,module,exports) {

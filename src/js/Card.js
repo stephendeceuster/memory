@@ -7,7 +7,7 @@ export default class Card {
     this._isFlipped = false;
     //this.setUpEvents();
   }
-  init() {
+  init = () => {
     this._holder.insertAdjacentHTML(
       "beforeend",
       `
@@ -24,5 +24,15 @@ export default class Card {
       ` 
     );
     return this._holder.querySelector('.card:last-child');
+  }
+
+  setUpEvents = () => {
+    this._ref.addEventListener('click', () => flip);
+  }
+
+  flip = () => {
+    if (this._isFlipped) {
+      
+    }
   }
 }
