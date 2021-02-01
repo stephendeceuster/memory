@@ -5,7 +5,7 @@ export default class Card {
     this._flippedEvent = new CustomEvent("flipped", {detail: this});
     this._ref = this.init();
     this._isFlipped = false;
-    //this.setUpEvents();
+    this.setUpEvents();
   }
   init = () => {
     this._holder.insertAdjacentHTML(
@@ -27,12 +27,15 @@ export default class Card {
   }
 
   setUpEvents = () => {
-    this._ref.addEventListener('click', () => flip);
+    this._ref.addEventListener("click", this.flip);
+    this._ref.onclick = this.flip;
   }
 
   flip = () => {
-    if (this._isFlipped) {
-      
+    if (!this._isFlipped) {
+      this._ref.classList.add('flipped');
+      this._isFlipped = true;
+      dispatchEvent(this._flippedEvent);
     }
   }
 }
